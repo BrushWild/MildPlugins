@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Plugin-Version: 0.0.1
+Plugin-Id: xpdropnotification-plugin
+Plugin-Provider: BrushWild
+Plugin-Description: Plays a sound when xp drops. Wub wub wuuub wub wubbb
+ b...
+Plugin-License: 3-Clause BSD License
+
