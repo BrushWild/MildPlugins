@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 BrushWild <https://github.com/BrushWild>
+ * Copyright (c) 2019 Owain van Brakel <https://github.com/Owain94>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,10 +23,10 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "0.0.1"
+version = "0.0.2"
 
-project.extra["PluginName"] = "XpDropNotification"
-project.extra["PluginDescription"] = "Plays a sound when xp drops. Wub wub wuuub wub wubbbb..."
+project.extra["PluginName"] = "Test Plugin"
+project.extra["PluginDescription"] = "This is a test plugin."
 
 tasks {
     jar {
@@ -35,7 +35,6 @@ tasks {
                     "Plugin-Version" to project.version,
                     "Plugin-Id" to nameToId(project.extra["PluginName"] as String),
                     "Plugin-Provider" to project.extra["PluginProvider"],
-                    //"Plugin-Dependencies" to nameToId("extutils"),
                     "Plugin-Description" to project.extra["PluginDescription"],
                     "Plugin-License" to project.extra["PluginLicense"]
             ))
