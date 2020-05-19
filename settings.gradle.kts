@@ -27,7 +27,7 @@ rootProject.name = "MildPlugins"
 
 //include(":kotlinexample")
 //include(":javaexample")
-include(":test")
+//include(":test")
 include(":XpDropNotification")
 
 for (project in rootProject.children) {

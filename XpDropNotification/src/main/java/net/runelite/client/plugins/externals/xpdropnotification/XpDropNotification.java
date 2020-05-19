@@ -26,7 +26,7 @@
 package net.runelite.client.plugins.externals.xpdropnotification;
 
 // Imports
-//import com.google.inject.Provides;
+import com.google.inject.Provides;
 //import java.io.File;
 //import java.io.IOException;
 import javax.inject.Inject;
@@ -35,7 +35,7 @@ import net.runelite.api.Client;
 import net.runelite.api.SoundEffectID;
 import net.runelite.api.SoundEffectVolume;
 import net.runelite.api.events.GameTick;
-//import net.runelite.client.config.ConfigManager;
+import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 //import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
@@ -62,15 +62,39 @@ public class XpDropNotification extends Plugin
 
 	// Init member variables
 
-//    @Provides
-//    XpDropNotification provideConfig(ConfigManager configManager)
-//    {
-//        return configManager.getConfig(XpDropNotificationConfig.class);
-//    }
+	@Provides
+	XpDropNotificationConfig provideConfig(ConfigManager configManager)
+	{
+		return configManager.getConfig(XpDropNotificationConfig.class);
+	}
+
+	@Override
+	protected void startUp()
+	{
+		// runs on plugin startup
+		log.info("Plugin started");
+
+		// example how to use config items
+		if (config.testItem())
+		{
+			// do stuff
+			log.info("The value of 'config.testItem()' is ${config.testItem()}");
+		}
+	}
+
+	@Override
+	protected void shutDown()
+	{
+		// runs on plugin shutdown
+		log.info("Plugin stopped");
+	}
 
 	@Subscribe
 	public void onGameTick(GameTick tick)
 	{
+		// runs every gametick
+		log.info("Gametick");
+
 		// Check for xp drops and play a sound effect when it happens
 		if (config.testItem())
 		{

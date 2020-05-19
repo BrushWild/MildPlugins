@@ -22,22 +22,21 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 package net.runelite.client.plugins.externals.xpdropnotification;
 
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
-//import net.runelite.client.config.Range;
-//import net.runelite.client.config.Units;
 
-@ConfigGroup("xpdropnotification")
+@ConfigGroup("XpDropNotification")
+
 public interface XpDropNotificationConfig extends Config
 {
 	@ConfigItem(
 			keyName = "testItem",
 			name = "Test Item",
-			description = "Test Item Description"
+			description = "Test Item Description",
+			position = 0
 	)
 	default boolean testItem()
 	{
