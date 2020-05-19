@@ -26,7 +26,7 @@
 package net.runelite.client.plugins.externals.xpdropnotification;
 
 // Imports
-import com.google.inject.Provides;
+//import com.google.inject.Provides;
 //import java.io.File;
 //import java.io.IOException;
 import javax.inject.Inject;
@@ -35,7 +35,7 @@ import net.runelite.api.Client;
 import net.runelite.api.SoundEffectID;
 import net.runelite.api.SoundEffectVolume;
 import net.runelite.api.events.GameTick;
-import net.runelite.client.config.ConfigManager;
+//import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 //import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.plugins.Plugin;
@@ -48,7 +48,7 @@ import org.pf4j.Extension;
 		name = "Xp Drop Notification",
 		enabledByDefault = false,
 		description = "Plays a sound when xp drops. Wub wub wuuub wub wubbbb...",
-		tags = {"skilling", "tick", "notification", "xp", "drop"},
+		tags = {"skilling", "tick", "notification", "xp", "drop", "experience"},
 		type = PluginType.MISCELLANEOUS
 )
 @Slf4j
@@ -62,11 +62,8 @@ public class XpDropNotification extends Plugin
 
 	// Init member variables
 
-	@Provides
-	XpDropNotificationConfig provideConfig(ConfigManager configManager)
-	{
-		return configManager.getConfig(XpDropNotificationConfig.class);
-	}
+	//@Provides
+	//XpDropNotificationConfig provideConfig(ConfigManager configManager) { return configManager.getConfig(XpDropNotificationConfig.class); }
 
 	@Override
 	protected void startUp()
@@ -78,7 +75,7 @@ public class XpDropNotification extends Plugin
 		if (config.testItem())
 		{
 			// do stuff
-			log.info("The value of 'config.testItem()' is ${config.testItem()}");
+			log.debug("The value of 'config.testItem()' is {}", config.testItem());
 		}
 	}
 
@@ -94,10 +91,12 @@ public class XpDropNotification extends Plugin
 	{
 		// runs every gametick
 		log.info("Gametick");
+		log.debug("The value of 'config.testItem()' is {}", config.testItem());
 
 		// Check for xp drops and play a sound effect when it happens
 		if (config.testItem())
 		{
+			log.info("Sound Played");
 			client.playSoundEffect(SoundEffectID.GE_INCREMENT_PLOP, SoundEffectVolume.MEDIUM_HIGH);
 		}
 	}
