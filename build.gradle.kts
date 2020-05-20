@@ -12,9 +12,10 @@ plugins {
 project.extra["GithubUrl"] = "http://github.com/BrushWild/MildPlugins"
 
 apply<BootstrapPlugin>()
+apply<VersionPlugin>()
 
 subprojects {
-    group = "com.example"
+    group = "com.openosrs.externals"
 
     project.extra["PluginProvider"] = "BrushWild"
     project.extra["ProjectSupportUrl"] = "https://discord.gg/TJdCAy2"
