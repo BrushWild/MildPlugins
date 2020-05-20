@@ -12,13 +12,12 @@ plugins {
 project.extra["GithubUrl"] = "http://github.com/BrushWild/MildPlugins"
 
 apply<BootstrapPlugin>()
-//apply<VersionPlugin>()
 
 subprojects {
     group = "com.example"
 
     project.extra["PluginProvider"] = "BrushWild"
-    project.extra["ProjectSupportUrl"] = ""
+    project.extra["ProjectSupportUrl"] = "https://discord.gg/TJdCAy2"
     project.extra["PluginLicense"] = "3-Clause BSD License"
 
     repositories {

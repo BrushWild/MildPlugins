@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Owain van Brakel <https:github.com/Owain94>
+ * Copyright (c) 2020 BrushWild <https://github.com/BrushWild>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -25,10 +25,7 @@
 
 rootProject.name = "MildPlugins"
 
-//include(":kotlinexample")
-//include(":javaexample")
-//include(":test")
-include(":XpDropNotification")
+include(":XpDropSounds")
 
 for (project in rootProject.children) {
     project.apply {
