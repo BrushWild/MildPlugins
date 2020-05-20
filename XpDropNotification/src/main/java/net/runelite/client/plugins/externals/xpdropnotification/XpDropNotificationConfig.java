@@ -24,6 +24,7 @@
  */
 package net.runelite.client.plugins.externals.xpdropnotification;
 
+import net.runelite.api.SoundEffectVolume;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
@@ -32,14 +33,44 @@ import net.runelite.client.config.ConfigItem;
 
 public interface XpDropNotificationConfig extends Config
 {
+	public enum Volume
+	{
+		LOW("Low", SoundEffectVolume.LOW),
+		MEDIUM_LOW("Medium Low", SoundEffectVolume.MEDIUM_LOW),
+		MEDIUM_HIGH("Medium High", SoundEffectVolume.MEDIUM_HIGH),
+		HIGH("High", SoundEffectVolume.HIGH);
+
+		private final String name;
+		private final int vol;
+		Volume(String name, int vol)
+		{
+			this.name = name;
+			this.vol = vol;
+		}
+
+		public String toString()
+		{
+			return this.name;
+		}
+
+		public int toInt()
+		{
+			return this.vol;
+		}
+	}
+
 	@ConfigItem(
-			keyName = "testItem",
-			name = "Test Item",
-			description = "Test Item Description",
+			keyName = "notificationVolume",
+			name = "Volume",
+			description = "",
 			position = 0
 	)
-	default boolean testItem()
+	default Volume notificationVolume()
 	{
-		return false;
+		return Volume.MEDIUM_HIGH;
 	}
+	//default int notificationVolume()
+	//{
+	//	return Volume.MEDIUM_HIGH.toInt();
+	//}
 }
