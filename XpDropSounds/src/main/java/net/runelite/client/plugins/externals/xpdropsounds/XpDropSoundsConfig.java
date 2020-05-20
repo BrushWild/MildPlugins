@@ -90,12 +90,12 @@ public interface XpDropSoundsConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "notificationVolume",
+			keyName = "soundVolume",
 			name = "Volume",
 			description = "I'm not sure this works :d",
 			position = 0
 	)
-	default Volume notificationVolume()
+	default Volume GetSoundVolume()
 	{
 		return Volume.MEDIUM_HIGH;
 	}
@@ -103,7 +103,7 @@ public interface XpDropSoundsConfig extends Config
 	@ConfigItem(
 			keyName = "soundId",
 			name = "Sound",
-			description = "Changes the sound for notification drops."
+			description = "Changes the sound played for xp drops."
 	)
 	default SoundEffectMapping GetSoundEffectMapping()
 	{

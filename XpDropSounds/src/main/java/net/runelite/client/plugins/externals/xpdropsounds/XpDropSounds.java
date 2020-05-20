@@ -46,7 +46,7 @@ import org.pf4j.Extension;
 		name = "Xp Drop Sounds",
 		enabledByDefault = false,
 		description = "Plays a sound when xp drops. Wub wub wuuub wub wubbbb...",
-		tags = {"skilling", "tick", "notification", "xp", "drop", "experience"},
+		tags = {"skilling", "tick", "sound", "xp", "drop", "experience"},
 		type = PluginType.MISCELLANEOUS
 )
 @Slf4j
@@ -87,7 +87,7 @@ public class XpDropSounds extends Plugin
 		if (config.onTick())
 		{
 			//log.info("Gametick");
-			client.playSoundEffect(config.GetSoundEffectMapping().toInt(), config.notificationVolume().toInt());
+			client.playSoundEffect(config.GetSoundEffectMapping().toInt(), config.GetSoundVolume().toInt());
 		}
 	}
 
@@ -95,6 +95,6 @@ public class XpDropSounds extends Plugin
 	public void onStatChanged(StatChanged statChanged)
 	{
 		//log.info("Stat changed");
-		client.playSoundEffect(config.GetSoundEffectMapping().toInt(), config.notificationVolume().toInt());
+		client.playSoundEffect(config.GetSoundEffectMapping().toInt(), config.GetSoundVolume().toInt());
 	}
 }
