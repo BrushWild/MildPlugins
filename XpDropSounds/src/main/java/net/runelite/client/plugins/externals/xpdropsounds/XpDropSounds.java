@@ -32,8 +32,10 @@ import com.google.inject.Provides;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
+import net.runelite.api.GameState;
 import net.runelite.api.events.GameTick;
 import net.runelite.api.events.StatChanged;
+import net.runelite.api.events.GameStateChanged;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.plugins.Plugin;
@@ -59,6 +61,7 @@ public class XpDropSounds extends Plugin
 	private XpDropSoundsConfig config;
 
 	// Init member variables
+	private boolean waitForLogin;
 
 	@Provides
 	XpDropSoundsConfig provideConfig(ConfigManager configManager)
@@ -71,6 +74,8 @@ public class XpDropSounds extends Plugin
 	{
 		// runs on plugin startup
 		//log.info("Plugin started");
+
+		waitForLogin = true;
 	}
 
 	@Override
@@ -83,6 +88,7 @@ public class XpDropSounds extends Plugin
 	@Subscribe
 	public void onGameTick(GameTick tick)
 	{
+		waitForLogin = false;
 		// runs every gametick
 		if (config.onTick())
 		{
@@ -94,7 +100,21 @@ public class XpDropSounds extends Plugin
 	@Subscribe
 	public void onStatChanged(StatChanged statChanged)
 	{
+		if (waitForLogin)
+		{
+			return;
+		}
 		//log.info("Stat changed");
 		client.playSoundEffect(config.GetSoundEffectMapping().toInt(), config.GetSoundVolume().toInt());
+	}
+
+	@Subscribe
+	void onGameStateChanged(GameStateChanged event)
+	{
+		GameState state = event.getGameState();
+		if (state == GameState.LOGGING_IN || state == GameState.HOPPING)
+		{
+			waitForLogin = true;
+		}
 	}
 }
