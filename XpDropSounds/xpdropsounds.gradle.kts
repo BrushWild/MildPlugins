@@ -23,7 +23,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-version = "5.20.0"
+version = "0.1.0"
 
 project.extra["PluginName"] = "XpDropSounds"
 project.extra["PluginDescription"] = "Plays a game sound when xp drops. Wub wub wuuub wub wubbbb..."
