@@ -4,3 +4,5 @@
 build\
 release\
 .gradle\
+buildSrc\.gradle\
+buildSrc\build\
