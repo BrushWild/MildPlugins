@@ -1,3 +1,3 @@
 # BrushWild's Mild Plugins
 
-Start of greatness
+Exploration into OpenOSRS/Runelite Plugins
