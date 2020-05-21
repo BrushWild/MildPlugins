@@ -38,6 +38,7 @@ open class BootstrapTask : DefaultTask() {
             val bootstrapDir = File("${project.projectDir}")
             val bootstrapReleaseDir = File("${project.projectDir}/release")
 
+            bootstrapDir.mkdirs()
             bootstrapReleaseDir.mkdirs()
 
             val plugins = ArrayList<JSONObject>()
