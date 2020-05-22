@@ -67,23 +67,25 @@ open class BootstrapTask : DefaultTask() {
                             "releases" to releases.toTypedArray()
                     ).jsonObject()
 
-                    //for (i in 0 until baseBootstrap.length()) {
-                        //val item = baseBootstrap.getJSONObject(i)
-                    for (i in 0 until baseBootstrap.getJSONArray(0).length()) {
-                        val item = baseBootstrap.getJSONArray(0).getJSONObject(i)
+                    for (i in 0 until baseBootstrap.length()) {
+                        val bootstrapFileArray = baseBootstrap.getJSONArray(i)
 
-                        if (item.get("id") != nameToId(it.project.extra.get("PluginName") as String)) {
-                            continue
-                        }
+                        for (j in 0 until bootstrapFileArray.length()) {
+                            val item = bootstrapFileArray.getJSONObject(i)
 
-                        if (it.project.version.toString() in item.getJSONArray("releases").toString()) {
+                            if (item.get("id") != nameToId(it.project.extra.get("PluginName") as String)) {
+                                continue
+                            }
+
+                            if (it.project.version.toString() in item.getJSONArray("releases").toString()) {
+                                pluginAdded = true
+                                plugins.add(item)
+                                break
+                            }
+
+                            plugins.add(JsonMerger(arrayMergeMode = JsonMerger.ArrayMergeMode.MERGE_ARRAY).merge(item, pluginObject))
                             pluginAdded = true
-                            plugins.add(item)
-                            break
                         }
-
-                        plugins.add(JsonMerger(arrayMergeMode = JsonMerger.ArrayMergeMode.MERGE_ARRAY).merge(item, pluginObject))
-                        pluginAdded = true
                     }
 
                     if (!pluginAdded)
