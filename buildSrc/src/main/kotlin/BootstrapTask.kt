@@ -10,7 +10,6 @@ import org.gradle.kotlin.dsl.get
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
-import java.lang.RuntimeException
 import java.nio.file.Paths
 import java.security.MessageDigest
 import java.text.SimpleDateFormat
@@ -27,21 +26,10 @@ open class BootstrapTask : DefaultTask() {
         return MessageDigest.getInstance("SHA-512").digest(file).fold("", { str, it -> str + "%02x".format(it) }).toUpperCase()
     }
 
-//    private fun getBootstrap(filename: String): JSONArray? {
-//        val bootstrapFile = File(filename).readLines()
-//
-//        return JSONObject("{\"plugins\":$bootstrapFile}").getJSONArray("plugins")
-//    }
+    private fun getBootstrap(filename: String): JSONArray? {
+        val bootstrapFile = File(filename).readLines()
 
-    private fun getBootstrap(): JSONArray? {
-        val client = OkHttpClient()
-
-        val url = "https://raw.githubusercontent.com/BrushWild/MildPlugins/master/plugins.json"
-        val request = Request.Builder()
-                .url(url)
-                .build()
-
-        client.newCall(request).execute().use { response -> return JSONObject("{\"plugins\":${response.body!!.string()}}").getJSONArray("plugins") }
+        return JSONObject("{\"plugins\":$bootstrapFile}").getJSONArray("plugins")
     }
 
     @TaskAction
@@ -50,12 +38,10 @@ open class BootstrapTask : DefaultTask() {
             val bootstrapDir = File("${project.projectDir}")
             val bootstrapReleaseDir = File("${project.projectDir}/release")
 
-            bootstrapDir.mkdirs()
             bootstrapReleaseDir.mkdirs()
 
             val plugins = ArrayList<JSONObject>()
-            val baseBootstrap = getBootstrap() ?: throw RuntimeException("Base bootstrap is null!")
-            //val baseBootstrap = getBootstrap("$bootstrapDir/plugins.json") ?: throw RuntimeException("Base bootstrap is null!")
+            val baseBootstrap = getBootstrap("$bootstrapDir/plugins.json") ?: throw RuntimeException("Base bootstrap is null!")
 
             project.subprojects.forEach {
                 if (it.project.properties.containsKey("PluginName") && it.project.properties.containsKey("PluginDescription")) {
@@ -81,8 +67,10 @@ open class BootstrapTask : DefaultTask() {
                             "releases" to releases.toTypedArray()
                     ).jsonObject()
 
-                    for (i in 0 until baseBootstrap.length()) {
-                        val item = baseBootstrap.getJSONObject(i)
+                    //for (i in 0 until baseBootstrap.length()) {
+                        //val item = baseBootstrap.getJSONObject(i)
+                    for (i in 0 until baseBootstrap.getJSONArray(0).length()) {
+                        val item = baseBootstrap.getJSONArray(0).getJSONObject(i)
 
                         if (item.get("id") != nameToId(it.project.extra.get("PluginName") as String)) {
                             continue
