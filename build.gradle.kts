@@ -9,7 +9,7 @@ plugins {
     checkstyle
 }
 
-project.extra["GithubUrl"] = "http://github.com/BrushWild/MildPlugins"
+project.extra["GithubUrl"] = "https://github.com/BrushWild/MildPlugins"
 
 apply<BootstrapPlugin>()
 apply<VersionPlugin>()
