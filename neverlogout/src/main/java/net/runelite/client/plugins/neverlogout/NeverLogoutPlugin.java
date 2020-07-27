@@ -63,15 +63,6 @@ public class NeverLogoutPlugin extends Plugin
 		randomDelay = randomDelay();
 	}
 
-//	@Inject
-//	private NeverLogoutConfig config;
-//
-//	@Provides
-//	NeverLogoutConfig provideConfig(ConfigManager configManager)
-//	{
-//		return configManager.getConfig(NeverLogoutConfig.class);
-//	}
-
 	@Subscribe
 	private void onGametick(GameTick gameTick)
 	{
